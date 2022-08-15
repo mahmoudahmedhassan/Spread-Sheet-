@@ -2,9 +2,9 @@ import { React } from 'react'
 import Dropdown from 'react-bootstrap/Dropdown';
 import { materialNames } from '../data/StudentsName'
 
-export default function DropdownButs({setSelectMaterialName}) {
-     const selectedDrop = (materialName) => {
-        setSelectMaterialName(materialName);
+export default function DropdownButs({inSertNewSheet}) {
+     const selectedDrop = (materialName,id) => {
+         inSertNewSheet(materialName,id)
     }
     return (
         <div>
@@ -17,7 +17,7 @@ export default function DropdownButs({setSelectMaterialName}) {
                     {materialNames &&
                         materialNames.map(materialName => (
                             <Dropdown.Item key={materialName.id} 
-                             onClick={() => selectedDrop(materialName.materialName)} 
+                             onClick={() => selectedDrop(materialName.materialName,materialName.id)} 
                             >{materialName.materialName}</Dropdown.Item>
                         ))
                     }

@@ -5,20 +5,17 @@ import {
      ColumnDirective, ColumnsDirective, 
      RangeDirective, RangesDirective,
       RowDirective, RowsDirective, SheetDirective,
-    SheetsDirective, SpreadsheetComponent
+    SheetsDirective, SpreadsheetComponent,
 } from '@syncfusion/ej2-react-spreadsheet';
  
 import { studentName } from '../data/StudentsName.js';
-
+ 
 function SpreadSheetStudent() {
-    const [selectMaterialName, setSelectMaterialName] = useState('material_1')
+    // const [selectMaterialName, setSelectMaterialName] = useState('material_1')
 
     let SSObj = SpreadsheetComponent;
 
-    // const btnClick = () => {
-    //     SSObj.sheets[0].ranges[0].dataSource = defaultData
-    // }
-
+    // on created event fun 
     const onCreated = () => {
         // style taple
         SSObj.cellFormat({
@@ -33,15 +30,31 @@ function SpreadSheetStudent() {
     //    protected taple
         SSObj.protectSheet(0, { selectCells: true }, "123");
         SSObj.lockCells("E3:E12", false);
+
+     };
+ 
+    //  insert new sheet 
+    const inSertNewSheet =(name, id)=>{
+        console.log(name, id);
+        SSObj.insertSheet([{
+            index: {id},
+            name: {name},
+            ranges: [{dataSource: studentName}],
+            columns: [{ width: 150 }, { width: 110 }, { width: 110 }, { width: 85 }, { width: 85 }, { width: 85 }]
+          }])
     }
 
-    return (
-        <div>
-            {/* <button id="changeDataBtn" className='e-btn' onClick={btnClick}>Change Datasource</button> */}
+    // const insert=()=>{
+    //     SSObj.insertSheet(insertSheetModel);
+    //     SSObj.duplicateSheet();
 
-            <DropdownButs setSelectMaterialName={setSelectMaterialName} />
+    // }
+
+    return (
+        <div> 
+            <DropdownButs inSertNewSheet={inSertNewSheet} />
             <SpreadsheetComponent
-                height={600}
+                height={500}
                 ref={((x) => SSObj = x)}
                 created={onCreated}
                 allowCellFormatting={true}
@@ -59,7 +72,7 @@ function SpreadSheetStudent() {
                         <RowsDirective>
                             <RowDirective height={40}>
                                 <CellsDirective>
-                                    <CellDirective value={selectMaterialName} colSpan={4}></CellDirective>
+                                    <CellDirective value='test' colSpan={5}></CellDirective>
                                 </CellsDirective>
                             </RowDirective>
                         </RowsDirective>
