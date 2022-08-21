@@ -2,9 +2,10 @@ import { React } from 'react'
 import Dropdown from 'react-bootstrap/Dropdown';
 import { materialNames } from '../data/StudentsName'
 
-export default function DropdownButs({inSertNewSheet}) {
+export default function DropdownButs({inSertNewSheet,setSelectMaterialName}) {
      const selectedDrop = (materialName,id) => {
-         inSertNewSheet(materialName,id)
+        setSelectMaterialName(materialName);
+        inSertNewSheet(materialName,id)
     }
     return (
         <div>
